@@ -1,0 +1,22 @@
+<!-- tell compiler that this page is an extention of the base_layout -->
+{% extends 'base_layout.html' %}
+
+<!-- indicating the bit of code that needs to rendered within the base_layout -->
+{% block content %}
+    <h1>Here is the post_list</h1>
+    <!-- create a container that carries all qtns in this django app -->
+    <div class="all_posts">
+        <!-- create python code within html to iterate through each and all qtns -->
+        {% for postObj in all_posts %}
+           <!-- create code for each particular post/object -->
+           
+           <div class="PostClass">
+              <!-- double curly braces are used each time we're to output dynamic data -->
+              <h2 class="text-dark"><a href="{% url 'postsApp:post_detail_url' my_slug=postObj.slug %}">{{postObj.title}}</a></h2>
+              <p>{{postObj.shortened_post}}</p>
+              <p>{{postObj.snippet}}</p>
+              <p>{{postObj.date}}</p>
+           </div>
+        {% endfor %}
+    </div>
+{% endblock %}

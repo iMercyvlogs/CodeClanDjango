@@ -1,0 +1,19 @@
+<!-- tell compiler that this page is an extention of the base_layout -->
+{% extends 'base_layout.html' %}
+
+<!-- indicating the bit of code that needs to be rendered within the base_layout -->
+{% block content %}
+    <div class="all_posts">
+        
+        <div class="thePost text-dark">
+            <h1>{{postObj.title}}</h1>
+            <p>{{postObj.body}} If nothing else is visible before this particular sentence and on this smae line,, then know that the object qwery was unsuccessful </p>
+            <p>{{postObj.snippet}}</p>
+            <p>{{postObj.date}}</p>
+            
+            
+        </div>
+
+        
+    </div>    
+{% endblock %}

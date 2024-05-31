@@ -1,0 +1,19 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+    <h1>Login</h1>
+    <form class="site_form" action="{% url 'accountsApp:login_view_url' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        {% if request.GET.next %}
+        <!-- check if the query parameter 'next' exists -->
+           <input type="hidden", name="next", value="{{request.GET.next}}">
+           <!-- input field is automatically generated using any value that django generates as "next" value -->
+
+        {% endif %}
+
+        <input type="submit" value="Login">
+    </form>
+
+{% endblock %}
