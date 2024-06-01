@@ -5,6 +5,13 @@
 {% block content %}
     <div class="create-post">
         <h2>Create a snippet post</h2>
+        <form class="site_form" action="{% url 'postsApp:post_create_url' %}" method="post">
+           <!-- add encryption of any file that is to be uploaded by user -->
+           <!-- do this by adding this : enctype="multipart/form-data" added to the form tag  -->
+           {% csrf_token %}
+            {{form}}
+            <input type="submit" value="Create">
+        </form>
     </div>
 
 {% endblock %}

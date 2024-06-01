@@ -42,15 +42,32 @@
  
         <div class="wrapper col-md-10">
             <nav id="search_bar" class="d-flex  my-3">
-                <form class="d-flex " role="search" name="search_bar">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                    
-                </form>
-                <form class="logout-link" action="{% url 'accountsApp:logout_view_url' %}" method="post">
-                    {% csrf_token %} <!--requred everytime a post request is done, for security reasons -->
-                    <button type="submit">Logout</button>
-                </form>
+                <ul class="d-flex">
+                    <li>
+                        <form class="d-flex " role="search" name="search_bar">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-primary" type="submit">Search</button>
+                            
+                        </form>
+                    </li>
+                    <!-- the following if statement is supposed to allow the user only see login & signup buttons if they are logged out, and 'logout' button if they are loggedin  -->
+                    {% if user.is_authenticated %}
+                        <li>
+                            <form class="logout-link" action="{% url 'accountsApp:logout_view_url' %}" method="post">
+                                {% csrf_token %} <!--requred everytime a post request is done, for security reasons -->
+                                <button type="submit">Logout</button>
+                            </form>
+
+                        </li>
+                        <!-- also the possibility of creating a post only if they are logged in -->
+                        <li>
+                            <a href="{% url 'postsApp:post_create_url' %}" class="highlight">Post Snippet</a>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'accountsApp:login_view_url' %}">Login</a></li>
+                        <li><a href="{% url 'accountsApp:signup_view_url' %}">Signup</a></li>
+                    {% endif %}
+                </ul>
             </nav>
             <!-- create a space/block where other pages will be displayed -->
            
