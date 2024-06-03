@@ -8,77 +8,103 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <title>CodeClan</title>
     </head>
-    <body class=" row ">
-        <header class="bg-dark col-md-2">
-            <!-- here is the nav area wrapped in a wrapper -->
-            <div class=" text-white  my-3">
-                <nav id="sidebar" class="d-grid col-md-10 container">
-                    <div class="">
-                       <h3>CodeClan</h3>
-                    </div>
-                    <ul class="navbar-nav text-white d-grid " id="homeSubmenu">
-                        <li class="nav-item py-5 ">
-                            <a class="btn btn-primary" href="{% url 'homepage_url' %}" role="button">Home</a>
+    <body class="" style="background-color: black;">
+        <div class="d-flex">
+            <header class=" col-md-2 bg-dark " >
+                
+                <div class=" text-white my-3 ">
+                    <nav id="sidebar" class="container ">
+                        <div class="py-3">
+                           <h3 class="fst-italic">Code<span class="text-primary">Clan</span></h3>
+                        </div>
+                        <ul class=" nav text-white gap-5 d-grid" id="homeSubmenu">
+                            <li class="nav-item  ">
+                                <a class="btn btn-primary w-75 " href="{% url 'homepage_url' %}" role="button">Home</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="btn btn-primary w-75" href="{% url 'postsApp:post_list_url' %}" role="button">Posts</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="btn btn-primary w-75" href="{% url 'questionsApp:question_list_url' %}" role="button">Questions</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-primary w-75" href="#" role="button">Tags</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="btn btn-primary w-75" href="#" role="button">Visualize</a>
+                            </li>
+                        </ul>
+                    </nav>
+            
+
+                    
+                </div>
+            </header>
+ 
+            <div class="px-5">
+                <nav class=" my-3">
+                    <ul class="navbar-nav position-relative">
+                        <li class="nav-item col-md-7 ">
+                            <form class="" role="search" name="search_bar">
+                                <input class="form-control me-2" type="search" placeholder="Search snippet or question" aria-label="Search">
+                                <!-- <button class="btn btn-outline-primary" type="submit">Search</button> -->
+                                
+                            </form>
                         </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary" href="{% url 'postsApp:post_list_url' %}" role="button">Posts</a>
-                        </li>
-                        <li class="nav-item py-5">
-                            <a class="btn btn-primary" href="{% url 'questionsApp:question_list_url' %}" role="button">Questions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="btn btn-primary" href="#" role="button">Tags</a>
-                        </li>
-                        <li class="nav-item py-5">
-                            <a class="btn btn-primary" href="#" role="button">Visualize</a>
-                        </li>
+                        <span class="position-absolute top-0 end-0">
+                            <!-- the following if statement is supposed to allow the user only see login & signup buttons if they are logged out, and 'logout' button if they are loggedin  -->
+                            {% if user.is_authenticated %}
+                                <span class="d-flex gap-3">
+                                    <li class="nav-item" >
+                                        <form class="logout-link " action="{% url 'accountsApp:logout_view_url' %}" method="post">
+                                            {% csrf_token %} <!--requred everytime a post request is done, for security reasons -->
+                                            <button type="submit" class="btn btn-outline-primary">Logout</button>
+                                        </form>
+
+                                    </li>
+                                    <!-- also the possibility of creating a post only if they are logged in -->
+                                    <li class="nav-item">
+                                        <a href="{% url 'postsApp:post_create_url' %}" class="highlight btn btn-primary">Post Snippet</a>
+                                    </li>
+                                </span>
+                            {% else %}
+                                <span class="d-flex">
+                                    <li class="nav-item"><a href="{% url 'accountsApp:login_view_url' %}">Login</a></li>
+                                    <li class="nav-item"><a href="{% url 'accountsApp:signup_view_url' %}">Signup</a></li>
+                                </span>
+                            {% endif %}
+                        </span>
                     </ul>
                 </nav>
-        
-
-                
+                <!-- create a space/block where other pages will be displayed -->
+            
+                {% block content %}
+                <!-- the name of this space/block is "content" -->
+                {% endblock %} 
             </div>
-        </header>
- 
-        <div class="wrapper col-md-10">
-            <nav id="search_bar" class="d-flex  my-3">
-                <ul class="d-flex">
-                    <li>
-                        <form class="d-flex " role="search" name="search_bar">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-primary" type="submit">Search</button>
-                            
-                        </form>
-                    </li>
-                    <!-- the following if statement is supposed to allow the user only see login & signup buttons if they are logged out, and 'logout' button if they are loggedin  -->
-                    {% if user.is_authenticated %}
-                        <li>
-                            <form class="logout-link" action="{% url 'accountsApp:logout_view_url' %}" method="post">
-                                {% csrf_token %} <!--requred everytime a post request is done, for security reasons -->
-                                <button type="submit">Logout</button>
-                            </form>
 
-                        </li>
-                        <!-- also the possibility of creating a post only if they are logged in -->
-                        <li>
-                            <a href="{% url 'postsApp:post_create_url' %}" class="highlight">Post Snippet</a>
-                        </li>
-                    {% else %}
-                        <li><a href="{% url 'accountsApp:login_view_url' %}">Login</a></li>
-                        <li><a href="{% url 'accountsApp:signup_view_url' %}">Signup</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-            <!-- create a space/block where other pages will be displayed -->
-           
-            {% block content %}
-               <!-- the name of this space/block is "content" -->
-            {% endblock %} 
+        </div>
+    </body>
+
+
+    <footer class="bg-dark">
+        <div class="d-flex py-5 justify-content-center gap-5">
+            <div class="">
+                <p><a href="{% url 'homepage_url' %}">Home</a></p>
+                <p><a href="{% url 'postsApp:post_list_url' %}">Posts</a></p>
+                <p><a href="{% url 'questionsApp:question_list_url' %}">Questions</a></p>
+                <p><a href="{% url 'homepage_url' %}">Tags</a></p>
+                <p><a href="{% url 'homepage_url' %}">Visualize</a></p>
+            </div>
+            <div class="">
+                <p><a href="{% url 'homepage_url' %}">Home</a></p>
+                <p><a href="{% url 'postsApp:post_list_url' %}">Posts</a></p>
+                <p><a href="{% url 'questionsApp:question_list_url' %}">Questions</a></p>
+                <p><a href="{% url 'homepage_url' %}">Tags</a></p>
+                <p><a href="{% url 'homepage_url' %}">Visualize</a></p>
+            </div>
         </div>
 
-        <footer class="bg-dark">
-
-        </footer>
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    </body>
+    </footer>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </html>
