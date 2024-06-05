@@ -11,9 +11,9 @@ def homepage(request):
     #return HttpResponse('homepage')
     return render(request,'Home.html')
 
-def questions(request):
+#def questions(request):
     #return HttpResponse('questions')
-    return render(request,'questions.html')
+    #return render(request,'questions.html')
 
 # def posts(request):
 #     #return HttpResponse('posts')

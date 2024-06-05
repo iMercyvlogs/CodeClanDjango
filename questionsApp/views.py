@@ -10,10 +10,18 @@ def question_list(request):
     return render(request,'questionsApp/question_list.html',{'all_questions':all_questions})
 
 
-#def question_detail(request,my_slug):
-    #return HttpResponse(my_slug)
+# def question_detail(request,my_slug):
+#     return HttpResponse(my_slug)
 
-def question_detail(request,questionObj_id):
-    theQuestion=QuestionClass.objects.get(id=questionObj_id)
-    #theQuestion=get_object_or_404(QuestionClass,pk=questionObj_id)
+# def question_detail(request,questionObj_id):
+#     theQuestion=QuestionClass.objects.get(id=questionObj_id)
+#     #theQuestion=get_object_or_404(QuestionClass,pk=questionObj_id)
+#     return render(request, 'questionsApp/question_detail.html', {'theQuestion':theQuestion})
+
+def question_detail(request,my_slug):
+
+    #return HttpResponse(my_slug)
+    theQuestion=QuestionClass.objects.get(slug=my_slug)
+    #print(thePost) commented, as it obviously does not work.
+    #slug here represents the attribute "slug" in the class PostClass
     return render(request, 'questionsApp/question_detail.html', {'theQuestion':theQuestion})

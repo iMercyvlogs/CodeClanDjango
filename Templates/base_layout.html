@@ -14,24 +14,24 @@
                 
                 <div class=" text-white my-3 ">
                     <nav id="sidebar" class="container ">
-                        <div class="py-3">
+                        <div class="py-2 text-center">
                            <h3 class="fst-italic">Code<span class="text-primary">Clan</span></h3>
                         </div>
-                        <ul class=" nav text-white gap-5 d-grid" id="homeSubmenu">
+                        <ul class=" nav text-white gap-5 d-grid justify-content-center py-3" id="homeSubmenu">
                             <li class="nav-item  ">
-                                <a class="btn btn-primary w-75 " href="{% url 'homepage_url' %}" role="button">Home</a>
+                                <a class="btn btn-primary w-100 " href="{% url 'homepage_url' %}" role="button">Home</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="btn btn-primary w-75" href="{% url 'postsApp:post_list_url' %}" role="button">Posts</a>
+                                <a class="btn btn-primary w-100" href="{% url 'postsApp:post_list_url' %}" role="button">Posts</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="btn btn-primary w-75" href="{% url 'questionsApp:question_list_url' %}" role="button">Questions</a>
+                                <a class="btn btn-primary w-100" href="{% url 'questionsApp:question_list_url' %}" role="button">Questions</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-primary w-75" href="#" role="button">Tags</a>
+                                <a class="btn btn-primary w-100" href="#" role="button">Tags</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="btn btn-primary w-75" href="#" role="button">Visualize</a>
+                                <a class="btn btn-primary w-100" href="#" role="button">Visualize</a>
                             </li>
                         </ul>
                     </nav>
@@ -68,9 +68,9 @@
                                     </li>
                                 </span>
                             {% else %}
-                                <span class="d-flex">
-                                    <li class="nav-item"><a href="{% url 'accountsApp:login_view_url' %}">Login</a></li>
-                                    <li class="nav-item"><a href="{% url 'accountsApp:signup_view_url' %}">Signup</a></li>
+                                <span class="d-flex gap-3">
+                                    <li class="nav-item"><a href="{% url 'accountsApp:login_view_url' %}" class="btn btn-primary">Login</a></li>
+                                    <li class="nav-item"><a href="{% url 'accountsApp:signup_view_url' %}" class="btn btn-outline-primary">Signup</a></li>
                                 </span>
                             {% endif %}
                         </span>
