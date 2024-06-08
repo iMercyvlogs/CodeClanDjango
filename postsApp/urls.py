@@ -12,5 +12,6 @@ urlpatterns=[
     path('<slug:my_slug>/',views.post_detail, name="post_detail_url"),
     #<slug:my_slug> is a path converter that captures a string consisting of 
     #ASCII letters, numbers, hyphens, or underscores and assigns it to the variable my_slug. 
-    
+    #path('<slug:my_slug>/add-comment/', views.add_comment, name='AddComment_url'),
+    #path('add-comment/', views.add_comment, name='AddComment_url'),
 ]

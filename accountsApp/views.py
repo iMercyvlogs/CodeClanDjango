@@ -19,7 +19,7 @@ def signup_view(request):
     return render(request,'accountsApp/signup.html', {'form':signup_form})
 
 def login_view(request):
-    if request.method=='POST': #chwck that task is to post on the condition that it meets up to all pw requirements) then do the following
+    if request.method=='POST': #check that; task is to post on the condition that it meets up to all pw requirements) then do the following
         login_form=AuthenticationForm(data=request.POST)  #check data filled, for validity
         if login_form.is_valid():         #if it's valid, then log user in/redirect in this case
         #log user in

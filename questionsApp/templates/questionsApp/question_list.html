@@ -3,9 +3,9 @@
 
 <!-- indicating the bit of code that needs to rendered within the base_layout -->
 {% block content %}
-    <h1>Here is the question_list</h1>
+    <h1 class="text-center text-white mt-5">Here is the question_list</h1>
     <!-- create a container that carries all qtns in this django app -->
-    <div class="all_questions">
+    <div class="all_questions mt-5">
         <!-- create python code within html to iterate through each and all qtns -->
         {% for questionObj in all_questions %}
            <!-- create code for each particular post/object -->
@@ -13,10 +13,14 @@
            <div class="QuestionClass">
               <!-- double curly braces are used each time we're to output dynamic data -->
               <!-- <h2><a href="#">{{questionObj.title}}</a></h2> -->
-              <h2 class="text-dark"><a href="{% url 'questionsApp:question_list_url' my_slug=questionObj.slug %}">{{questionObj.title}}</a></h2>
-              <p>{{questionObj.shortened_qtn}}</p>
-              <p>{{questionObj.snippet}}</p>
-              <p>{{questionObj.date}}</p>
+              <h5 class="text-dark"><a href="{% url 'questionsApp:question_detail_url' my_slug=questionObj.slug %}" class="text-decoration-none">{{questionObj.title}}</a></h5>
+              <p class="text-light">{{questionObj.shortened_qtn}}</p>
+              <p class="text-light">{{questionObj.snippet}}</p>
+              <p class="text-light">{{questionObj.date}}</p>
+              <p class="text-light">{{questionObj.author}}</p>
+              <p >{{questionObj.tags}}</p>
+              <hr class="text-white">
+
            </div>
         {% endfor %}
     </div>

@@ -1,4 +1,3 @@
-
 {% extends 'base_layout.html' %}
 {% load static %}
 {% load widget_tweaks %}
@@ -8,9 +7,9 @@
     <div class="">
         <div class="container col-md-7 py-5">
             
-            <h2 class="text-center text-white">Create a snippet post</h2>
+            <h2 class="text-center text-white">Ask a Question</h2>
 
-            <form class="" action="{% url 'postsApp:post_create_url' %}" method="post">
+            <form class="" action="{% url 'questionsApp:question_create_url' %}" method="post">
             <!-- add encryption of any file that is to be uploaded by user -->
             <!-- do this by adding this : enctype="multipart/form-data" added to the form tag  -->
             {% csrf_token %}
@@ -22,17 +21,17 @@
                    {% render_field form.body placeholder="snippet description" class+="form-control bg-dark text-white" %}
                 </span>
                 <span class="mx-5 ">
-                   {% render_field form.slug placeholder="slug" class+="form-control bg-dark text-white" %}
+                    {% render_field form.snippet placeholder="code snippet" class+="form-control bg-dark text-white" %}
                 </span>
                 <span class="mx-5 ">
-                    {% render_field form.snippet placeholder="code snippet" class+="form-control bg-dark text-white" %}
+                   {% render_field form.slug placeholder="slug" class+="form-control bg-dark text-white" %}
                 </span>
                 <span>
                    {% render_field form.tags placeholder="insert coma separated tags" class+="form-control bg-dark text-white" %}
                 </span>
                 <span class="">
                 <!-- <input type="submit" value="Create"> -->
-                    <button type="submit" class="btn btn-primary w-100 my-3 ">Create Post</button>
+                    <button type="submit" class="btn btn-primary w-100 my-3 ">Ask</button>
                 </span>
             </form>
         </div>
@@ -48,19 +47,19 @@
 
 
         <div class="row mb-2 posts">
-            {% for postObj in allPosts %}
+            {% for questionObj in allPosts %}
             <div class="col-md-6">
                 <div class="cards">
                     <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
                         <div class="col p-4 d-flex flex-column position-static">
-                            <h3 class="my-1"><a href="{% url 'postsApp:post_detail_url' my_slug=postObj.slug %}">{{postObj.title}}</a></h3>
+                            <h3 class="my-1"><a href="{% url 'postsApp:post_detail_url' my_slug=postObj.slug %}">{{questionObj.title}}</a></h3>
                             <div style="display:flex">
-                                {% for tag in postObj.tags.all %}
+                                {% for tag in questionObj.tags.all %}
                                 <a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">#{{ tag }}</a>
                                 {% endfor %}
                             </div>
-                            <p class="mb-auto">{{postObj.body}}</p>
-                            <p class="mb-auto text-muted">{{postObj.date}}</p>
+                            <p class="mb-auto">{{questionObj.body}}</p>
+                            <p class="mb-auto text-muted">{{questionObj.date}}</p>
                         </div>
                     </div>
                 </div>       

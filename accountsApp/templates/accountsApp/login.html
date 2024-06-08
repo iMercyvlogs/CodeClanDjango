@@ -1,19 +1,25 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
+{% load widget_tweaks %}
 
-    <h1>Login</h1>
-    <form class="site_form" action="{% url 'accountsApp:login_view_url' %}" method="post">
-        {% csrf_token %}
-        {{form}}
-        {% if request.GET.next %}
-        <!-- check if the query parameter 'next' exists -->
-           <input type="hidden", name="next", value="{{request.GET.next}}">
-           <!-- input field is automatically generated using any value that django generates as "next" value -->
+    
+    
 
-        {% endif %}
+    <div class="container col-md-6 py-5">
+        <h1 class="text-center text-white">Login</h1> 
+        <form class="site_form" action="{% url 'accountsApp:login_view_url' %}" method="post">
+            {% csrf_token %}
+            {{form}}
+            {% if request.GET.next %}
+            check if the query parameter 'next' exists
+            <input type="hidden", name="next", value="{{request.GET.next}}">
+            input field is automatically generated using any value that django generates as "next" value
 
-        <input type="submit" value="Login">
-    </form>
+            {% endif %}
 
+            <input type="submit" value="Login" id="loginBtn">
+        </form> 
+    </div>
+    
 {% endblock %}

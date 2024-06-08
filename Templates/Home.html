@@ -4,31 +4,31 @@
 
 <!-- indicating the bit of code that needs to rendered within the base_layout -->
 {% block content %}
-<div class="d-flex gap-4 ">
+<div class="d-md-flex gap-4 ">
     <img src="{% static 'Images/Pair programming-cuate.png' %}" alt="" height="430px" width="480px">
     
     
     <div class=" col-md-5 mt-5 pt-5">
         <h2 class="fst-italic text-white">Find nerds just like you: share your code snippets, ask questions and have them answered</h2>
         
-        <button class="btn  btn-primary w-50"><a href="{% url 'accountsApp:signup_view_url' %}" class="text-white">Signup</a></button>
+        <button class="btn  btn-primary w-50"><a href="{% url 'accountsApp:signup_view_url' %}" class="text-decoration-none text-white">Signup</a></button>
     </div>
 </div>
 <div class="gap-5 row mb-5">
-    <div class="bg-dark col-md-3 p-3 rounded">
+    <div class="bg-dark col-md-3 p-3 rounded card">
         <h5 class="text-primary">Post code snippet</h5>
-        <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quod quae possimus ratione?</p>
-        <button class="btn btn-primary text-white"><a href="{% url 'postsApp:post_create_url' %}" class="text-white">Post</a></button>
+        <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quod quae possimus ratione? Lorem ipsum dolor sit.</p>
+        <button class="btn btn-primary text-white"><a href="{% url 'postsApp:post_create_url' %}" class="text-decoration-none text-white">Post</a></button>
     </div>
-    <div class="bg-dark col-md-3 p-3 rounded">
+    <div class="bg-dark col-md-3 p-3 rounded card">
         <h5 class="text-primary">Ask code related questions</h5>
         <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quod quae possimus ratione?</p>
-        <button class="btn btn-primary "><a href="#" class="text-white">Post</a></button>
+        <button class="btn btn-primary "><a href="{% url 'questionsApp:question_create_url' %}" class="text-decoration-none text-white">Ask Question</a></button>
     </div>
-    <div class="bg-dark col-md-3 p-3 rounded">
+    <div class="bg-dark col-md-3 p-3 rounded card">
         <h5 class="text-primary">View language trends</h5>
-        <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quod quae possimus ratione?</p>
-        <button class="btn btn-primary text-white"><a href="#" class="text-white">Post</a></button>
+        <p class="text-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et quod quae possimus ratione Lorem ipsum dolor sit.?</p>
+        <button class="btn btn-primary text-white"><a href="#" class="text-decoration-none text-white">Post</a></button>
     </div>
 </div>
 {% endblock %}

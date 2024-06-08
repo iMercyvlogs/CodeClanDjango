@@ -40,7 +40,13 @@ INSTALLED_APPS = [
     'questionsApp.apps.QuestionsappConfig',
     'postsApp.apps.PostsappConfig',
     'accountsApp.apps.AccountsappConfig',
+    'taggit',
+    'widget_tweaks',
+    #'crispy_forms',
 ]
+
+#CRISPY_TEMPLATE_PACK='bootstrap4'
+#CRISPY_ALLOWED_TEMPLATE_PACKS=('bootstrap','uni_form','bootstrap3','bootstrap4')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

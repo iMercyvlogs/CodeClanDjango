@@ -10,9 +10,33 @@
             <p>{{postObj.body}} If nothing else is visible before this particular sentence and on this smae line,, then know that the object qwery was unsuccessful </p>
             <p>{{postObj.snippet}}</p>
             <p>{{postObj.date}}</p>
+            <p>{{postObj.author}}</p>
             
             
         </div>
+        <hr>
+        <h2 class="my-4">Comments</h2>
+        <div class="py-2">
+            {% for commentObj in comments %}
+                <div class="card shadow p-2">
+                    <div class="row">
+                        <div class="col-md-2">{{ commentObj.user }}</div>
+                        <div class="col-md-10">{{ commentObj.comment }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+            <form action="{% url 'postsApp:post_detail_url' my_slug=postObj.slug %}" method="post">
+                
+                {% csrf_token %}
+                <input type="hidden" name="postObj_id" value="{{ postObj.id }}">
+                <textarea name="comment" class="form-control" id="comment" rows="5" cols="15"></textarea>
+                <button type="submit" class="btn btn-primary">Add Comment</button>
+
+            </form>
+        </div>
+
 
         
     </div>    
