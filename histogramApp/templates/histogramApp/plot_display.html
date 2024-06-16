@@ -1,0 +1,18 @@
+<!-- tell compiler that this page is an extention of the base_layout -->
+{% extends 'base_layout.html' %}
+{% load custom_filters %}
+
+<!-- <link href="http://cdn.pydata.org/bokeh/release/bokeh-3.0.0.min.css" rel="stylesheet" type="text/css">
+<link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-3.0.0.min.css" rel="stylesheet" type="text/css">
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-3.0.0.min.js"></script>
+<script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-3.0.0.min.js"></script>
+{{ script | safe }} -->
+
+
+<!-- indicating the bit of code that needs to be rendered within the base_layout -->
+{% block content %}
+    <div>
+       
+       <img src="data:image/png;base64,{{ plot_image }}" alt="Histogram of Data">
+    </div>
+{% endblock %}

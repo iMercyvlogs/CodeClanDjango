@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'accountsApp.apps.AccountsappConfig',
     'taggit',
     'widget_tweaks',
+    'histogramApp.apps.HistogramappConfig'
     #'crispy_forms',
 ]
 

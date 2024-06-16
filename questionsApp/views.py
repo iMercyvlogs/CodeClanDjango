@@ -8,9 +8,14 @@ from django.shortcuts import render, get_object_or_404,redirect
 from  django.contrib.auth.decorators import login_required
 from .import forms
 from taggit.models import Tag
-
 from django.contrib import messages #a kind of error handler
  
+
+
+
+
+
+
 
 # Create your views here.
 
@@ -65,3 +70,7 @@ def tagged(request, my_slug):
     # }
 
     return render(request, 'questionsApp/question_create.html',{'allQuestions':filteredQuestions})
+
+
+
+

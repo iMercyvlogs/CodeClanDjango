@@ -5,8 +5,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
+        <!-- bellow are links to styling pages: CSS and Bootstrap -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
+
 
         <title>CodeClan</title>
     </head>
@@ -33,7 +36,7 @@
                                 <a class="btn btn-primary w-100" href="#" role="button">Tags</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="btn btn-primary w-100" href="#" role="button">Visualize</a>
+                                <a class="btn btn-primary w-100" href="{% url 'histogramApp:histogram_url' %}" role="button">Visualize</a>
                             </li>
                         </ul>
                     </nav>
@@ -85,21 +88,45 @@
                     {% endblock %} 
                 </div>
 
-                <footer class="bg-dark w-100">
-                    <div class="d-flex py-5 justify-content-center gap-5">
+
+                {{ div | safe}}
+
+
+                <footer class=" w-100" style="background-color: black;">
+                    <hr class="text-white">
+                    <div class="d-md-flex ps-5 py-2 justify-content-center gap-5">
                         <div class="">
-                            <p><a href="{% url 'homepage_url' %}">Home</a></p>
-                            <p><a href="{% url 'postsApp:post_list_url' %}">Posts</a></p>
-                            <p><a href="{% url 'questionsApp:question_list_url' %}">Questions</a></p>
-                            <p><a href="{% url 'homepage_url' %}">Tags</a></p>
-                            <p><a href="{% url 'homepage_url' %}">Visualize</a></p>
+                            <div class=" ">
+                                <h3 class="fst-italic text-white">Code<span class="text-primary">Clan</span></h3>
+                            </div>
+                            
+                            
+                            
                         </div>
                         <div class="">
-                            <p><a href="{% url 'homepage_url' %}">Home</a></p>
-                            <p><a href="{% url 'postsApp:post_list_url' %}">Posts</a></p>
-                            <p><a href="{% url 'questionsApp:question_list_url' %}">Questions</a></p>
-                            <p><a href="{% url 'homepage_url' %}">Tags</a></p>
-                            <p><a href="{% url 'homepage_url' %}">Visualize</a></p>
+                            <p><a href="{% url 'homepage_url' %}" class="text-decoration-none">Home</a></p>
+                            <!-- <p><a href="{% url 'postsApp:post_list_url' %}" class="text-decoration-none">Posts</a></p>
+                            <p><a href="{% url 'questionsApp:question_list_url' %}" class="text-decoration-none">Questions</a></p> -->
+                            
+                        </div>
+                        <div class="">
+                            
+                            <p><a href="{% url 'postsApp:post_list_url' %}" class="text-decoration-none">Posts</a></p>
+                            <!-- <p><a href="{% url 'questionsApp:question_list_url' %}" class="text-decoration-none">Questions</a></p> -->
+                            
+                        </div>
+                        <div class="">
+                            
+                            <!-- <p><a href="{% url 'postsApp:post_list_url' %}" class="text-decoration-none">Posts</a></p> -->
+                            <p><a href="{% url 'questionsApp:question_list_url' %}" class="text-decoration-none">Questions</a></p>
+                            
+                        </div>
+                        <div class="">
+                            
+                            <!-- <p><a href="{% url 'postsApp:post_list_url' %}" class="text-decoration-none">Posts</a></p> -->
+                            <!-- <p><a href="{% url 'questionsApp:question_list_url' %}" class="text-decoration-none">Questions</a></p> -->
+                            <p><a href="{% url 'histogramApp:histogram_url' %}" class="text-decoration-none">View Trends</a></p>
+                            
                         </div>
                     </div>
     

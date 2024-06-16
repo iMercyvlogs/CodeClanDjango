@@ -36,6 +36,7 @@ urlpatterns = [
     path('posts/',include('postsApp.urls')),#link to posts page
     path('questions/', include('questionsApp.urls')),#link to questions page
     path('accounts/', include('accountsApp.urls')),
+    path('trends/',include('histogramApp.urls')),
 
 ]
 

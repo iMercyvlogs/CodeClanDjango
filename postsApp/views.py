@@ -54,13 +54,12 @@ def post_detail(request, my_slug):
 #also redirect users to login page if they aren't loggedin
 @login_required(login_url="/accounts/login/")
 def post_create(request):
-    common_tags=PostClass.tags.most_common()[:6]
+    common_tags=PostClass.tags.most_common()[:3]
     if request.method=='POST':
         create_form=forms.CreatePost(request.POST)  #this post only brings data, not files
         #so in a case where we also wanted to upload files, we would need to add : request.FILES
         if create_form.is_valid():   #check that the data has been accurately collected, then ..
            newpost=create_form.save(commit=False)  #commit=False asks django to hold-on for something to happen first before finally saving to db
-            
            newpost.author=request.user  #associate created post to the particular user,author
            newpost.save()  #now save to db
            #without next line, tags won't be saved

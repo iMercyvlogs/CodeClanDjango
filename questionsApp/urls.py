@@ -13,7 +13,7 @@ urlpatterns=[
     #<slug:my_slug> is a path converter that captures a string consisting of ASCII letters, numbers, hyphens, or underscores and assigns it to the variable my_slug. 
     #path('<int:questionObj_id>/',views.question_detail, name="question_detail_url"),
     #trying calling the objects here by ID instead of slug since using slugs doesnt currently work on this particular sub-app
-
+    
 ]
 
 
