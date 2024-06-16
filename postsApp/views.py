@@ -18,29 +18,30 @@ def post_list(request):
     return render(request, 'postsApp/post_list.html',{'all_posts':all_posts})
 
 def post_detail(request, my_slug):
+    print("I am printing " + my_slug)
     thepost = get_object_or_404(PostClass, slug=my_slug)
-    comments = PostCommentClass.objects.filter(commented_post=thepost)
+    # comments = PostCommentClass.objects.filter(commented_post=thepost)
 
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST) #use djangos inbuilt comment feature to collect data from user and save in "comment_form"
-        if comment_form.is_valid():   #check if it is valid then..
+    # if request.method == 'POST':
+    #     comment_form = CommentForm(request.POST) #use djangos inbuilt comment feature to collect data from user and save in "comment_form"
+    #     if comment_form.is_valid():   #check if it is valid then..
         
-            new_comment = comment_form.save(commit=False)   #save data from the form into new_comment" but don't update DB just yet
-            new_comment.commented_post = thepost    #associate the comment to the post that was commented on, then ..
-            new_comment.save()   #update DB
-            return redirect('post_detail', my_slug=thepost.slug)   #redirect user back to detail page with target slug
+    #         new_comment = comment_form.save(commit=False)   #save data from the form into new_comment" but don't update DB just yet
+    #         new_comment.commented_post = thepost    #associate the comment to the post that was commented on, then ..
+    #         new_comment.save()   #update DB
+    #         return redirect('post_detail', my_slug=thepost.slug)   #redirect user back to detail page with target slug
         
 
-    else:
-        comment_form = CommentForm()  #if not a POST request, then stay on same commentform page
+    # else:
+    #     comment_form = CommentForm()  #if not a POST request, then stay on same commentform page
 
     context = {
         'commented_post': thepost,
-        'comments': comments,
-        'comment_form': comment_form
+        # 'comments': comments,
+        # 'comment_form': comment_form
     }
 
-    return render(request, 'postsApp/post_detail.html', context)
+    return render(request, 'postsApp/post_detail.html',context )
 
 # def post_detail(request,my_slug):
 

@@ -28,15 +28,16 @@
                     {% render_field form.snippet placeholder="code snippet" class+="form-control bg-dark text-white" %}
                 </span>
                 <span>
-                   {% render_field form.tags placeholder="insert coma separated tags" class+="form-control bg-dark text-white" %}
+                   {% render_field form.tags placeholder="insert Programming language" class+="form-control bg-dark text-white" %}
                 </span>
+                
                 <span class="">
                 <!-- <input type="submit" value="Create"> -->
                     <button type="submit" class="btn btn-primary w-100 my-3 ">Create Post</button>
                 </span>
             </form>
         </div>
-        <div>
+        <!-- <div>
             <p>
                 Common Tags:
                 {% for mt in common_tags %}
@@ -44,10 +45,10 @@
                 {% endfor %}
             </p>
 
-        </div>
+        </div> -->
 
 
-        <div class="row mb-2 posts">
+        <!-- <div class="row mb-2 posts">
             {% for postObj in allPosts %}
             <div class="col-md-6">
                 <div class="cards">
@@ -66,7 +67,7 @@
                 </div>       
             </div>
             {% endfor %}
-        </div>
+        </div> -->
 
     </div>
 

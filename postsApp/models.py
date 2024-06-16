@@ -14,7 +14,7 @@ class PostClass(models.Model):
     snippet=models.TextField(blank=True, null=True)
     date=models.DateTimeField(auto_now_add=True)
     author=models.ForeignKey(User,default=None,on_delete=models.CASCADE) #This specifies that if the referenced User object is deleted, the associated PostClass object should also be deleted.
-
+    #postprogramming_language=models.CharField(max_length=50,default=None)
     tags=TaggableManager()
 
 
