@@ -1,5 +1,5 @@
 
-from .models import QuestionClass
+from .models import QuestionClass , AnswerClass
 from django.http import HttpResponse
 
 from django.shortcuts import render, get_object_or_404,redirect
@@ -9,6 +9,8 @@ from  django.contrib.auth.decorators import login_required
 from .import forms
 from taggit.models import Tag
 from django.contrib import messages #a kind of error handler
+
+from .forms import AnswerForm 
  
 
 
@@ -26,14 +28,53 @@ def question_list(request):
     return render(request,'questionsApp/question_list.html',{'all_questions':all_questions})
 
 
-
+@login_required(login_url="/accounts/login/")
 def question_detail(request,my_slug):
 
     #return HttpResponse(my_slug)
     #theQuestion=QuestionClass.objects.get(slug=my_slug)
     theQuestion = get_object_or_404(QuestionClass, slug=my_slug)
     #slug here represents the attribute "slug" in the class QuestionClass
-    return render(request, 'questionsApp/question_detail.html', {'theQuestion':theQuestion})
+    answers = AnswerClass.objects.filter(commented_post=theQuestion)
+    success_message=None
+    
+    if request.method == 'POST':
+        
+        answer_form = forms.AnswerForm(request.POST) #use djangos inbuilt comment feature to collect data from user and save in "comment_form"
+        
+        if answer_form.is_valid():   #check if it is valid then..
+        
+            new_answer = answer_form.save(commit=False)   #save data from the form into new_comment" but don't update DB just yet
+            new_answer.commented_post = theQuestion    #associate the comment to the post that was commented on, then ..
+            new_answer.commenter=request.user #set the commenter_id field
+            new_answer.save()   #update DB
+            #reset the form after successful submission
+            
+            #the message incase saving was successful
+            success_message="Your comment has been posted SUCCESSFULLY! ;)"
+            answer_form=forms.AnswerForm()
+            return redirect('question_detail', my_slug=theQuestion.slug)   #redirect user back to detail page with target slug
+        else:
+            # success_message="Your comment submission was UNSUCCESSFUL!  :("
+            success_message=answer_form.errors 
+
+    else:
+        answer_form = forms.AnswerForm()  #if not a POST request, then stay on same commentform page
+
+    context = {
+        'commented_post': theQuestion,
+        'answers': answers,
+        'answer_form': answer_form,
+        'success_message': success_message
+        
+    }
+
+    return render(request, 'questionsApp/question_detail.html', context)
+
+
+
+
+
 
 
 @login_required(login_url="/accounts/login/")

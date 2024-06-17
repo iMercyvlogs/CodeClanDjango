@@ -28,3 +28,14 @@ class QuestionClass(models.Model):
     def shortened_qtn(self):
         return self.body[:50]+ "..."
     
+
+class AnswerClass(models.Model):
+    comment_id=models.AutoField(primary_key=True)
+    comment=models.TextField()
+    commenter=models.ForeignKey(User, on_delete=models.CASCADE)
+    commented_post=models.ForeignKey(QuestionClass,on_delete=models.CASCADE)
+    parent_comment=models.ForeignKey('self',on_delete=models.CASCADE,null=True)
+    snippet=models.TextField(blank=True, null=True)
+    #allows comments to have a hierarchical parent-child relationship//nested structure//self-referential foreign key=> one comment can be the child of another
+    created_at=models.DateTimeField(auto_now_add=True)
+    

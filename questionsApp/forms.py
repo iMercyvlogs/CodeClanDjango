@@ -11,3 +11,10 @@ class AskQuestionClass(forms.ModelForm):   #shows the kind of form we are using 
         model=models.QuestionClass    #tells which particular model we are working with
         fields=['title','body','slug','snippet','tags',]   #choose which particular fields/attributes we want to be displayed for filling
         #date field is ommitted since it is automatically generated and not filled by user
+
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model=models.AnswerClass
+        # fields=['comment_id','comment','commenter','commented_post','parent_comment']
+        fields=['comment','snippet']  #this takes only attributes of the class that requires the user to input
