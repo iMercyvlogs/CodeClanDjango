@@ -9,7 +9,7 @@ from django.contrib import messages #a kind of error handler
 from .forms import CommentForm 
 
 
-# Create your views here.
+#views here.
 
 def post_list(request):
     #creating variables that stores all the objects in this class/model
@@ -17,28 +17,46 @@ def post_list(request):
     all_posts=PostClass.objects.all().order_by('date')
     return render(request, 'postsApp/post_list.html',{'all_posts':all_posts})
 
+
+@login_required(login_url="/accounts/login/")
 def post_detail(request, my_slug):
-    print("I am printing " + my_slug)
-    thepost = get_object_or_404(PostClass, slug=my_slug)
-    # comments = PostCommentClass.objects.filter(commented_post=thepost)
+    
+    thepost = get_object_or_404(PostClass, slug=my_slug)#query an object from the db table with unique slug-name "my_slug"
+    comments = PostCommentClass.objects.filter(commented_post=thepost) #query comment object that's related to the previously queried post object
+    #posts_comments=PostCommentClass.objects.all().filter(commented_post=thepost)
+    #let's create a sucess message to see if the comment even get's successfully saved
+    success_message=None
+    
 
-    # if request.method == 'POST':
-    #     comment_form = CommentForm(request.POST) #use djangos inbuilt comment feature to collect data from user and save in "comment_form"
-    #     if comment_form.is_valid():   #check if it is valid then..
+    if request.method == 'POST':
         
-    #         new_comment = comment_form.save(commit=False)   #save data from the form into new_comment" but don't update DB just yet
-    #         new_comment.commented_post = thepost    #associate the comment to the post that was commented on, then ..
-    #         new_comment.save()   #update DB
-    #         return redirect('post_detail', my_slug=thepost.slug)   #redirect user back to detail page with target slug
+        comment_form = forms.CommentForm(request.POST) #use djangos inbuilt comment feature to collect data from user and save in "comment_form"
         
+        if comment_form.is_valid():   #check if it is valid then..
+        
+            new_comment = comment_form.save(commit=False)   #save data from the form into new_comment" but don't update DB just yet
+            new_comment.commented_post = thepost    #associate the comment to the post that was commented on, then ..
+            new_comment.commenter=request.user #set the commenter_id field
+            new_comment.save()   #update DB
+            #reset the form after successful submission
+            
+            #the message incase saving was successful
+            success_message="Your comment has been posted SUCCESSFULLY! ;)"
+            comment_form=forms.CommentForm()
+            return redirect('post_detail', my_slug=thepost.slug)   #redirect user back to detail page with target slug
+        else:
+            # success_message="Your comment submission was UNSUCCESSFUL!  :("
+            success_message=comment_form.errors 
 
-    # else:
-    #     comment_form = CommentForm()  #if not a POST request, then stay on same commentform page
+    else:
+        comment_form = forms.CommentForm()  #if not a POST request, then stay on same commentform page
 
     context = {
         'commented_post': thepost,
-        # 'comments': comments,
-        # 'comment_form': comment_form
+        'comments': comments,
+        'comment_form': comment_form,
+        'success_message': success_message
+        
     }
 
     return render(request, 'postsApp/post_detail.html',context )
@@ -55,7 +73,7 @@ def post_detail(request, my_slug):
 #also redirect users to login page if they aren't loggedin
 @login_required(login_url="/accounts/login/")
 def post_create(request):
-    common_tags=PostClass.tags.most_common()[:3]
+    # common_tags=PostClass.tags.most_common()[:3]
     if request.method=='POST':
         create_form=forms.CreatePost(request.POST)  #this post only brings data, not files
         #so in a case where we also wanted to upload files, we would need to add : request.FILES

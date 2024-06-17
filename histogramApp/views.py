@@ -14,7 +14,7 @@ from taggit.models import TaggedItem #importing the Tag model from Taggit sub in
 
 
 
-def bokehView(request):
+def histogramDisplay(request):
 
     #collect tags and their frequencies across both apps
     tagged_items=TaggedItem.objects.select_related('tag').annotate(count=models.Count('tag'))

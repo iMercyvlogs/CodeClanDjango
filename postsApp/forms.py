@@ -33,9 +33,10 @@ class CreatePost(forms.ModelForm):   #shows the kind of form we are using in thi
 class CommentForm(forms.ModelForm):
     class Meta:
         model=models.PostCommentClass
-        fields=['comment_id','comment','commenter','commented_post','parent_comment']
+        # fields=['comment_id','comment','commenter','commented_post','parent_comment']
+        fields=['comment']
 
-    def __init__(self, *args,**kwargs):
-        super().__init__(*args,**kwargs)
-        self.fields['comment'].widget.attrs.update({'class':'form-control'})
-        self.fields['commenter'].widget.attrs.update({'class':'form-control'})
+    # def __init__(self, *args,**kwargs):
+    #     super().__init__(*args,**kwargs)
+    #     self.fields['comment'].widget.attrs.update({'class':'form-control'})
+    #     self.fields['commenter'].widget.attrs.update({'class':'form-control'})

@@ -89,7 +89,7 @@
                 </div>
 
 
-                {{ div | safe}}
+                
 
 
                 <footer class=" w-100" style="background-color: black;">
@@ -134,6 +134,19 @@
             </div>
         </div>
 
+
+
+        <script>
+            // Get the alert element
+            var alert = document.querySelector('.alert');
+          
+            // If the alert is present, hide it after 5 seconds
+            if (alert) {
+              setTimeout(function() {
+                alert.style.display = 'none';
+              }, 5000); // 5000 milliseconds (5 seconds)
+            }
+          </script>
         
     </body>
 

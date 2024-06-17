@@ -26,6 +26,9 @@
 .btn-primary,#loginBtn,#signupBtn{
     background-image: linear-gradient(to bottom right, blue, white);
 }
+.btn-primary:active {
+    background-color: #272680a4; 
+}
 
 .helptext, .helptext ul{
     margin: 0 auto 20px;

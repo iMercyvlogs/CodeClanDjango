@@ -1,21 +1,52 @@
 <!-- tell compiler that this page is an extention of the base_layout -->
 {% extends 'base_layout.html' %}
+{% load static %}
+{% load widget_tweaks %}
 
 <!-- indicating the bit of code that needs to be rendered within the base_layout -->
 {% block content %}
-    <div class="all_posts">
+    <div class="pt-5 ">
         
-        <div class="thePost text-dark">
-            <h1>{{commented_post.title}}</h1>
-            <p>{{commented_post.body}} If nothing else is visible before this particular sentence and on this smae line,, then know that the object qwery was unsuccessful </p>
+        <div class="thePost text-white">
+            <h1 class="py-5 text-center">{{commented_post.title}}</h1>
+            <p>{{commented_post.body}} </p>
             <p>{{commented_post.snippet}}</p>
             <p>{{commented_post.date}}</p>
             <p>{{commented_post.author}}</p>
             
             
         </div>
-        <hr>
-        
+        <hr class="text-light">
+        <h4 class="my-4 text-white">Comments</h4>
+        <div class="py-2">
+            {% if success_message %}
+               <div class="alert alert-success">{{success_message}}</div>
+            {% endif %}
+            <div>
+                {% for new_comment in comments %}
+                    <div class="text-white">
+                        <div class="row">
+                            <div class="col-md-2">{{ new_comment.commenter }}</div>
+                            <div class="col-md-10">{{ new_comment.comment }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <hr class="text-light">
+
+            <form action="{% url 'postsApp:post_detail_url' my_slug=commented_post.slug %}" method="post" class="w-75 justify-content-center">
+                
+                {% csrf_token %}
+                <span class="mx-5">
+                    {% render_field comment_form.comment placeholder="leave a comment here" class+="form-control bg-dark text-white" %}
+                </span>
+                <input type="hidden" name="postObj_id" value="{{ comment_form.id }}">
+                <!-- <textarea name="comment" class="form-control bg-dark text-white" id="comment" rows="5" cols="10"></textarea> -->
+                <button type="submit" class="btn btn-primary  my-4">Add Comment</button>
+
+            </form>
+        </div>
 
 
         
